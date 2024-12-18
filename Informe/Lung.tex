@@ -5,6 +5,7 @@
 \usepackage{geometry}
 \usepackage{listings}
 \usepackage{xcolor}
+\usepackage{graphicx}
 
 \lstset{
     language=Python,
@@ -80,7 +81,7 @@
 
 	\subsection*{\underline{Time}}
 
-	La variable de tiempo de supervivencia es fundamental para el análisis de supervivencia y se presenta en días. \textbf{La Figura }\ref{fig:time} muestra un histograma de los tiempos de supervivencia, que revela una distribución asimétrica con una cola larga hacia la derecha. La mayoría de los pacientes sobrevivieron menos de 500 días, con un pico alrededor de los 200 días. La censura también es evidente en los datos, ya que hay un número significativo de pacientes cuyo tiempo de supervivencia no se conoce debido a la censura.
+	La variable de tiempo de supervivencia es fundamental para el análisis de supervivencia y se presenta en días. \textbf{La Figura }\ref{fig:time_distribution} muestra un histograma de los tiempos de supervivencia, que revela una distribución asimétrica con una cola larga hacia la derecha. La mayoría de los pacientes sobrevivieron menos de 500 días, con un pico alrededor de los 200 días. La censura también es evidente en los datos, ya que hay un número significativo de pacientes cuyo tiempo de supervivencia no se conoce debido a la censura.
 	
 	\subsubsection*{Clasificación de la variable}
 
@@ -145,14 +146,12 @@ A continuación se presentan las medidas de variabilidad para la variable de tie
 
 El siguienete gráfico muestra la distribución de los tiempos de supervivencia comparada con diferentes tipos de distribución.
 
-% \begin{figure}[h]
-% 	\centering
-% 	\includegraphics[width=0.7\textwidth]{.images/time_distribution.jpg}
-% 	\caption{Distribución de los tiempos de supervivencia}
-% 	\label{fig:time_distribution}
-% \end{figure}
-
-hrule height 0.5mm
+\begin{figure}[h]
+ 	\centering
+ 	\includegraphics[width=0.7\textwidth]{distribucion_time.png}
+ 	\caption{Distribución de los tiempos de supervivencia}
+ 	\label{fig:time_distribution}
+\end{figure}
 
 Por tanto es conveniente realizar las pruebas de hipótesis para determinar si la variable sigue una distribución específica. Dicha prueba resultó en los siguientes valores:
 
@@ -218,11 +217,112 @@ El intervalo de confianza para la media de la variable \textbf{time} es de 269.2
 
     \subsection*{\underline{Status}}
 
-    La variable de estado de censura, codificada como 1 para censurado y 2 para fallecido, es crucial para el análisis de supervivencia. \textbf{La Figura }\ref{fig:status} muestra la distribución de los estados de censura en el conjunto de datos. La mayoría de los pacientes están censurados, lo que refleja la naturaleza de los estudios de supervivencia donde no todos los pacientes experimentan el evento de interés (es decir, la muerte) durante el período de seguimiento. Dado que este valor es categórico, no se realizarán los análisis pertinentes.    
+    La variable de estado de censura, codificada como 1 para censurado y 2 para fallecido, es crucial para el análisis de supervivencia. \textbf{La Figura }\ref{fig:status_distribution} muestra la distribución de los estados de censura en el conjunto de datos. La mayoría de los pacientes están censurados, lo que refleja la naturaleza de los estudios de supervivencia donde no todos los pacientes experimentan el evento de interés (es decir, la muerte) durante el período de seguimiento. 
+    
+    \subsubsection*{Clasificación de la variable}
+
+    En cuanto al tipo de variable es \textbf{cualitativa nominal} debido a que se da en dos categorías y de \textbf{intervalos} ya que el 0 tiene un significado.
+
+    \subsubsection*{Medidas de tendencia central}
+
+A continuación se presentan las medidas de tendencia central para la variable de estado de censura:
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|}
+        \hline
+        \textbf{Medida} & \textbf{Valor} \\
+        \hline
+        Media & 1.723684 \\
+        \hline
+        Moda & 2 \\
+        \hline
+        Mediana & 2 \\
+        \hline
+        Q1 (25\%) & 1 \\
+        \hline
+        Q3 (75\%) & 2 \\
+        \hline
+    \end{tabular}
+    \caption{Medidas de tendencia central para la variable de estado de censura}
+    \label{tab:medidas_tendencia_central_status}
+\end{table}
+
+\subsubsection*{Medidas de variabilidad}
+
+A continuación se presentan las medidas de variabilidad para la variable de estado de censura:
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|}
+        \hline
+        \textbf{Medida} & \textbf{Valor} \\
+        \hline
+        Máximo & 2 \\
+        \hline
+        Mínimo & 1 \\
+        \hline
+        Rango & 1 \\
+        \hline
+        Varianza & 0.200846 \\
+        \hline
+        Desviación Estándar & 0.448159 \\
+        \hline
+        Coeficiente de Variación & 0.260001 \\
+        \hline
+    \end{tabular}
+    \caption{Medidas de variabilidad para la variable de estado de censura}
+    \label{tab:medidas_variabilidad_status}
+\end{table}
+
+\newpage
+\subsubsection*{Prueba de Distribución}
+
+El siguiente gráfico muestra la distribución de los estados de censura en el conjunto de datos, este tipo de variable aleatoria es una Bernoulli ya que solo puede tomar dos valores, en este caso 1 y 2.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{distribucion_status.png}
+    \caption{Distribución de los tiempos de supervivencia}
+    \label{fig:status_distribution}
+\end{figure}
+
+\subsubsection*{Intervalo de confianza para la proporción}
+
+El intervalo de confianza para la proporción de la variable \textbf{status} es de 0.6474013349555908 a 0.7999670860970408 con un nivel de confianza del 99\%. Esto lo podemos saber gracias al siguiente código:
+
+\begin{lstlisting}[language=Python, caption={Código en Python para calcular el intervalo de confianza},label={2st:intervalo_confianza_normal}]
+    import pandas as pd
+    import numpy as np
+    from scipy.stats import norm as z
+    
+    # Leer el archivo CSV y seleccionar la columna 'status'
+    muestra = pd.read_csv('lung_dataset.csv')['status'].dropna().values
+    
+    n = len(muestra)
+    proporcion_fallecidos = np.sum(muestra == 2) / n
+    
+    # Nivel de confianza
+    nivel_significancia = 0.01
+    confianza = 1 - nivel_significancia
+    
+    z_critico = z.ppf(1 - nivel_significancia / 2)
+
+    margen_error = z_critico * np.sqrt(proporcion_fallecidos * (1 - proporcion_fallecidos) / n)
+    
+    limite_inferior = proporcion_fallecidos - margen_error
+    limite_superior = proporcion_fallecidos + margen_error
+
+    print(f"Intervalo de confianza al {confianza*100}%: ({limite_inferior}, {limite_superior})")
+
+\end{lstlisting}
+
+\subsubsection*{Hipótesis creativa (lo mismo)}
+
 
     \subsection*{\underline{Age}}
 
-    La edad del paciente al inicio del estudio es una variable importante para evaluar la influencia de la edad en la supervivencia. \textbf{La Figura }\ref{fig:age} muestra un histograma de las edades de los pacientes, que revela una distribución aproximadamente simétrica con un pico alrededor de los 65 años.
+    La edad del paciente al inicio del estudio es una variable importante para evaluar la influencia de la edad en la supervivencia. \textbf{La Figura }\ref{fig:age_distribution} muestra un histograma de las edades de los pacientes, que revela una distribución aproximadamente simétrica con un pico alrededor de los 65 años.
 	
     \subsubsection*{Clasificación de la variable}
 
@@ -253,6 +353,7 @@ El intervalo de confianza para la media de la variable \textbf{time} es de 269.2
         \label{tab:medidas_tendencia_central_edad}
     \end{table}
     
+    \newpage
     \subsubsection*{Medidas de variabilidad}
     
     A continuación se presentan las medidas de variabilidad para la variable de edad:
@@ -284,14 +385,12 @@ El intervalo de confianza para la media de la variable \textbf{time} es de 269.2
 
     El siguiente gráfico muestra la distribución de las edades de los pacientes comparada con diferentes tipos de distribución.
 
-% \begin{figure}[h]
-% 	\centering
-% 	\includegraphics[width=0.7\textwidth]{.images/time_distribution.jpg}
-% 	\caption{Distribución de los tiempos de supervivencia}
-% 	\label{fig:time_distribution}
-% \end{figure}
-
-\hrule height 0.5mm
+ \begin{figure}[h]
+ 	\centering
+ 	\includegraphics[width=0.7\textwidth]{distribucion_age.png}
+ 	\caption{Distribución de la edad de los pacientes}
+ 	\label{fig:age_distribution}
+ \end{figure}
 
 Por tanto es conveniente realizar las pruebas de hipótesis para determinar si la variable
 sigue una distribución específica. Dicha prueba resultó en los siguientes valores:
@@ -334,21 +433,15 @@ muestra = pd.read_csv('lung_dataset.csv')['age'].dropna().values
 
     \subsection*{\underline{Sex}}
 
-    La variable de sexo del paciente, codificada como 1 para masculino y 2 para femenino, es un factor importante a considerar en el análisis de supervivencia. Sin embargo, debido a su naturaleza categórica, no se pueden aplicar directamente las mismas técnicas estadísticas que se utilizan para las variables cuantitativas. En lugar de ello, se pueden realizar análisis de supervivencia estratificados por sexo.
-    
-    \textbf{La Figura }\ref{fig:sex} muestra la distribución de los pacientes por sexo. Como se puede observar, hay una proporción ligeramente mayor de pacientes masculinos en comparación con los femeninos. Esta diferencia en la distribución de sexos puede influir en los resultados de supervivencia y, por lo tanto, es crucial tenerla en cuenta en cualquier análisis posterior.
-
-    \subsection*{\underline{Ph.karno}}
-
-    La puntuación de rendimiento de Karnofsky asignada por el médico es una medida importante del estado funcional del paciente. \textbf{La Figura }\ref{fig:ph.karno} muestra un histograma de las puntuaciones de rendimiento de Karnofsky, que revela una distribución asimétrica con un pico alrededor de 80-90. Las puntuaciones de rendimiento de Karnofsky son una herramienta valiosa para evaluar la capacidad funcional de los pacientes y pueden ser predictivas de los resultados de supervivencia.
+    La variable de sexo del paciente, codificada como 1 para masculino y 2 para femenino, es un factor importante a considerar en el análisis de supervivencia.
 
     \subsubsection*{Clasificación de la variable}
 
-    En cuanto al tipo de variable es \textbf{cuantitativa discreta} debido a que se da en el número de puntos asignados por el médico de 0 a 100 y de \textbf{intervalos} ya que el 0 tiene un significado.
+    En cuanto al tipo de variable es \textbf{cualitativa nominal} debido a que se da en dos categorías y de \textbf{intervalos} ya que el 0 tiene un significado.
 
     \subsubsection*{Medidas de tendencia central}
 
-A continuación se presentan las medidas de tendencia central para la variable \textit{ph.karno}:
+A continuación se presentan las medidas de tendencia central para la variable \textit{sex}:
 
 \begin{table}[h!]
     \centering
@@ -356,24 +449,24 @@ A continuación se presentan las medidas de tendencia central para la variable \
         \hline
         \textbf{Medida} & \textbf{Valor} \\
         \hline
-        Media & 81.93833 \\
+        Media & 1.394737 \\
         \hline
-        Moda & 90 \\
+        Moda & 1.000000 \\
         \hline
-        Mediana & 80 \\
+        Mediana & 1.000000 \\
         \hline
-        Q1 (25\%) & 75 \\
+        Q1 (25\%) & 1.000000 \\
         \hline
-        Q3 (75\%) & 90 \\
+        Q3 (75\%) & 2.000000 \\
         \hline
     \end{tabular}
-    \caption{Medidas de tendencia central para la variable \textit{ph.karno}}
-    \label{tab:medidas_tendencia_central_ph_karno}
+    \caption{Medidas de tendencia central para la variable \textit{sex}}
+    \label{tab:medidas_tendencia_central_sex}
 \end{table}
 
 \subsubsection*{Medidas de variabilidad}
 
-A continuación se presentan las medidas de variabilidad para la variable \textit{ph.karno}:
+A continuación se presentan las medidas de variabilidad para la variable \textit{sex}:
 
 \begin{table}[h!]
     \centering
@@ -381,57 +474,44 @@ A continuación se presentan las medidas de variabilidad para la variable \texti
         \hline
         \textbf{Medida} & \textbf{Valor} \\
         \hline
-        Máximo & 100 \\
+        Máximo & 2.0000000 \\
         \hline
-        Mínimo & 50 \\
+        Mínimo & 1.0000000 \\
         \hline
-        Rango & 50 \\
+        Rango & 1.0000000 \\
         \hline
-        Varianza & 151.9784804 \\
+        Varianza & 0.2399722 \\
         \hline
-        Desviación Estándar & 12.3279552 \\
+        Desviación Estándar & 0.4898696 \\
         \hline
-        Coeficiente de Variación & 0.1504541 \\
-        \hline
-    \end{tabular}
-    \caption{Medidas de variabilidad para la variable \textit{ph.karno}}
-    \label{tab:medidas_variabilidad_ph_karno}
-\end{table}
-
-\subsubsection*{Prueba de Distribución}
-
-La siguiente tabla muestra la distribución de las puntuaciones de rendimiento de Karnofsky comparada con diferentes tipos de distribución.
-
-\clearpage
-
-\begin{table}[h!]
-    \centering
-    \begin{tabular}{|c|c|}
-        \hline
-        \textbf{Prueba} & \textbf{p-value} \\
-        \hline
-        Anderson-Darling (Normal) & 1.263849e-19 \\
-        \hline
-        Kolmogorov-Smirnov (Normal) & 4.325704e-08 \\
-        \hline
-        Shapiro-Wilk (Normal) & 1.660601e-10 \\
-        \hline
-        Kolmogorov-Smirnov (Exponencial) & 2.68196e-48 \\
-        \hline
-        Kolmogorov-Smirnov (Gamma) & 1.419316e-32 \\
-        \hline
-        Kolmogorov-Smirnov (Chi-cuadrado) & 1.353117e-197 \\
+        Coeficiente de Variación & 0.3512272 \\
         \hline
     \end{tabular}
-    \caption{Resultados de las pruebas de distribución para la variable \textit{ph.karno}}
-    \label{tab:pruebas_distribucion_ph_karno}
+    \caption{Medidas de variabilidad para la variable \textit{sex}}
+    \label{tab:medidas_variabilidad_sex}
 \end{table}
+    
+    \subsubsection*{Prueba de Distribución}
 
-    Como es posible notar la distribución empírica de las puntuaciones de rendimiento de Karnofsky no sigue nimguna de las distribucione conocidas (por lo que imbert vamos a ver que hacemos).
+    \textbf{La Figura }\ref{fig:sex_distribution} muestra la distribución de los pacientes por sexo. Como se puede observar, hay una proporción ligeramente mayor de pacientes masculinos en comparación con los femeninos. Esta diferencia en la distribución de sexos puede influir en los resultados de supervivencia y, por lo tanto, es crucial tenerla en cuenta en cualquier análisis posterior.
 
-    \subsubsection*{Intervalo de confianza para la media}
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.7\textwidth]{distribucion_sex.png}
+        \caption{Distribución del género de los pacientes}
+        \label{fig:sex_distribution}
+    \end{figure}
 
-    \subsubsection{Hipótesis creativa (lo mismo)}
+    \subsubsection*{Intervalo de confianza para la proporción}
+
+    El intervalo de confianza para la proporción de la variable \textbf{sex} es de 0.31135420869499797 a 0.47811947551552836 con un nivel de confianza del 99\%. Esto lo podemos saber gracias al siguiente código, al ser análogo al código \ref{2st:intervalo_confianza_normal} utilizado para el intervalo de confianza de la variable \textbf{status} solamente sustituiríamos:
+
+    \begin{lstlisting}[language=Python, caption={Código en Python para calcular el intervalo de confianza}]
+        muestra = pd.read_csv('lung_dataset.csv')['sex'].dropna().values
+
+    \end{lstlisting}
+
+    \subsubsection*{Hipótesis creativa (lo mismo)}
 
     \subsection*{\underline{Pat.karno}}
 
@@ -465,8 +545,6 @@ La siguiente tabla muestra la distribución de las puntuaciones de rendimiento d
         \caption{Medidas de tendencia central para la variable \textit{pat.karno}}
         \label{tab:medidas_tendencia_central_pat_karno}
     \end{table}
-    
-    \newpage
 
     \subsubsection*{Medidas de variabilidad}
     
@@ -495,34 +573,19 @@ La siguiente tabla muestra la distribución de las puntuaciones de rendimiento d
         \label{tab:medidas_variabilidad_pat_karno}
     \end{table}
 
+    \newpage
+
     \subsubsection*{Prueba de Distribución}
 
-    La siguiente tabla muestra la distribución de las puntuaciones de rendimiento de Karnofsky asignadas por los pacientes comparada con diferentes tipos de distribución.
-    
-    \begin{table}[h!]
-        \centering
-        \begin{tabular}{|c|c|}
-            \hline
-            \textbf{Prueba} & \textbf{p-value} \\
-            \hline
-            Anderson-Darling (Normal) & 1.097726e-14 \\
-            \hline
-            Kolmogorov-Smirnov (Normal) & 1.727245e-06 \\
-            \hline
-            Shapiro-Wilk (Normal) & 1.129768e-09 \\
-            \hline
-            Kolmogorov-Smirnov (Exponencial) & 8.72965e-48 \\
-            \hline
-            Kolmogorov-Smirnov (Gamma) & 8.79107e-33 \\
-            \hline
-            Kolmogorov-Smirnov (Chi-cuadrado) & 7.396948e-196 \\
-            \hline
-        \end{tabular}
-        \caption{Resultados de las pruebas de distribución para la variable \textit{pat.karno}}
-        \label{tab:pruebas_distribucion_pat_karno}
-    \end{table}
+    El siguiente gráfico muestra la distribución de las puntuaciones de rendimiento de Karnofsky asignadas por los pacientes comparada con diferentes tipos de distribución.
 
-    Como es posible notar la distribución empírica de las puntuaciones de rendimiento de Karnofsky asignadas por los pacientes no sigue nimguna de las distribucione conocidas (por lo que imbert vamos a ver que hacemos).
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.7\textwidth]{distribucion_pat.karno.png}
+        \caption{Distribución de las puntuaciones de rendimiento de Karnofsky asignadas por los pacientes}
+        \label{fig:pat.karno}
+    \end{figure}
+
 
     \subsubsection*{Intervalo de confianza para la media}
 
