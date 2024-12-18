@@ -5,9 +5,9 @@ library(survival)
 library(nortest)
 
 # Cargar el dataset
-data("lung")
+#data("lung")
 
-write.csv(lung, file = "E:/Proyectos/Lung-E-2025", row.names = FALSE)
+#write.csv(lung, file = "E:/Proyectos/Lung-E-2025", row.names = FALSE)
 
 # Función para calcular la moda
 get_mode <- function(x) {
