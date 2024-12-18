@@ -58,19 +58,19 @@ for (var in names(lung)) {
     }
     
     #Medidas de tendencia central
-    #central_measures <- c(mean = mean(data, na.rm = TRUE), mode = get_mode(data), median = median(data, na.rm = TRUE),
-    #                      Q1 = quantile(data, 0.25, na.rm = TRUE), Q3 = quantile(data, 0.75, na.rm = TRUE))
+    central_measures <- c(mean = mean(data, na.rm = TRUE), mode = get_mode(data), median = median(data, na.rm = TRUE),
+                          Q1 = quantile(data, 0.25, na.rm = TRUE), Q3 = quantile(data, 0.75, na.rm = TRUE))
     
     #Medidas de variabilidad
-    #variability_measures <- c(max = max(data, na.rm = TRUE), min = min(data, na.rm = TRUE), range = max(data, na.rm = TRUE) - min(data, na.rm = TRUE),
-    #                         variance = var(data, na.rm = TRUE), sd = sd(data, na.rm = TRUE), cv = sd(data, na.rm = TRUE) / mean(data, na.rm = TRUE))
+    variability_measures <- c(max = max(data, na.rm = TRUE), min = min(data, na.rm = TRUE), range = max(data, na.rm = TRUE) - min(data, na.rm = TRUE),
+                             variance = var(data, na.rm = TRUE), sd = sd(data, na.rm = TRUE), cv = sd(data, na.rm = TRUE) / mean(data, na.rm = TRUE))
     
     #Imprimir las medidas
-    #cat("Variable:", var, "\n")
-    #cat("Medidas de tendencia central:\n")
-    #print(central_measures)
-    #cat("Medidas de variabilidad:\n")
-    #print(variability_measures)
+    cat("Variable:", var, "\n")
+    cat("Medidas de tendencia central:\n")
+    print(central_measures)
+    cat("Medidas de variabilidad:\n")
+    print(variability_measures)
     
     # QQ plot con línea roja
     #qqnorm(data, main = paste("QQ plot de", var))

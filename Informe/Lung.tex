@@ -5,6 +5,7 @@
 \usepackage{geometry}
 \usepackage{listings}
 \usepackage{xcolor}
+\usepackage{graphicx}
 
 \lstset{
     language=Python,
@@ -528,7 +529,160 @@ La siguiente tabla muestra la distribución de las puntuaciones de rendimiento d
 
     \subsubsection*{Hipótesis creativa (lo mismo)}
 
-    
+
+    \subsection*{\underline{Wt.loss}}
+
+    La variable \texttt{wt.loss} representa la pérdida de peso en los pacientes con cáncer de pulmón. Específicamente, esta variable indica la cantidad de peso que ha perdido un paciente en los últimos seis meses antes de ser diagnosticado o evaluado.
+
+La pérdida de peso es un indicador importante en oncología, ya que puede reflejar el estado nutricional del paciente y la progresión de la enfermedad. En muchos casos, una pérdida significativa de peso puede asociarse con un pronóstico más desfavorable y puede influir en las decisiones sobre el tratamiento y el manejo del paciente.
+
+Es importante considerar esta variable junto con otras características clínicas y demográficas para obtener una comprensión más completa del estado del paciente y su supervivencia.
+Esta variable tiene valores negativos, lo que indica que algunos pacientes ganaron peso en lugar de perderlo. Esto puede deberse a una variedad de factores, como la retención de líquidos, la ganancia de peso relacionada con el tratamiento o la variabilidad en la medición del peso. En cualquier caso, es importante tener en cuenta esta variabilidad al interpretar los resultados del análisis.
+
+\subsubsection*{Clasificación de la variable}
+
+En cuanto al tipo de variable es \textbf{cuantitativa discreta}, aunque el peso generalmente se toma como una variable continua, en este caso se hace un redondeo a los \textbf{enteros} que representa el número de libras que ha perdido el paciente. Es de \textbf{intervalos} ya que el 0 tiene un significado.
+
+\subsubsection*{Medidas de tendencia central}
+
+A continuación se presentan las medidas de tendencia central para la variable \textit{wt.loss}:
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|}
+        \hline
+        \textbf{Medida} & \textbf{Valor} \\
+        \hline
+        Media & 9.831776 \\
+        \hline
+        Moda & 0.000000 \\
+        \hline
+        Mediana & 7.000000 \\
+        \hline
+        Q1 (25\%) & 0.000000 \\
+        \hline
+        Q3 (75\%) & 15.750000 \\
+        \hline
+    \end{tabular}
+    \caption{Medidas de tendencia central para la variable \textit{wt.loss}}
+    \label{tab:medidas_tendencia_central_wt_loss}
+\end{table}
+
+\subsubsection*{Medidas de variabilidad}
+
+A continuación se presentan las medidas de variabilidad para la variable \textit{wt.loss}:
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|}
+        \hline
+        \textbf{Medida} & \textbf{Valor} \\
+        \hline
+        Máximo & 68.000000 \\
+        \hline
+        Mínimo & -24.000000 \\
+        \hline
+        Rango & 92.000000 \\
+        \hline
+        Varianza & 172.657014 \\
+        \hline
+        Desviación Estándar & 13.139902 \\
+        \hline
+        Coeficiente de Variación & 1.336473 \\
+        \hline
+    \end{tabular}
+    \caption{Medidas de variabilidad para la variable \textit{wt.loss}}
+    \label{tab:medidas_variabilidad_wt_loss}
+\end{table}
+
+\subsubsection*{Prueba de Distribución}
+
+El siguiente gráfico muestra la distribución de la pérdida de peso en los pacientes comparada con diferentes tipos de distribución.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{distribución_wt_loss.png}
+    \caption{Distribución de la pérdida(o ganancia) de peso}
+    \label{fig:distribución_wt_loss}
+\end{figure}
+
+\newpage
+
+Como es posible notar la distribución empírica de la pérdida de peso no sigue ninguna de las distribuciones conocidas por lo que realizaremos un análisis diferenciado entre las personas que perdieron peso y las que ganaron peso.
+Haciendo dicho análisis podemos diferenciar los siguientes gráficos:
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{distribución_wt_loss_perdida.png}
+    \caption{Distribución de la pérdida de peso}
+    \label{fig:distribución_wt_loss_perdida}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{distribución_wt_loss_ganancia.png}
+    \caption{Distribución de la ganancia de peso}
+    \label{fig:distribución_wt_loss_ganancia}
+\end{figure}
+
+\newpage
+
+Por lo tanto, es conveniente realizar las pruebas de hipótesis para determinar si las variables siguen una distribución específica. Dicha prueba resultó en los siguientes valores:
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|}
+        \hline
+        \textbf{Prueba} & \textbf{p-value} \\
+        \hline
+        Anderson-Darling (Normal) & 1.197951e-11 \\
+        \hline
+        Kolmogorov-Smirnov (Normal) & 0.005456181 \\
+        \hline
+        Shapiro-Wilk (Normal) & 4.066897e-10 \\
+        \hline
+        Kolmogorov-Smirnov (Exponencial) & 0.09287115 \\
+        \hline
+        Kolmogorov-Smirnov (Gamma) & 0.03941509 \\
+        \hline
+        Kolmogorov-Smirnov (Chi-cuadrado) & 7.692063e-54 \\
+        \hline
+    \end{tabular}
+    \caption{Resultados de las pruebas de distribución para la variable \textit{wt.loss} de los que perdieron peso}
+    \label{tab:pruebas_distribucion_wt_loss_PERDIDA}
+\end{table}
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|}
+        \hline
+        \textbf{Prueba} & \textbf{p-value} \\
+        \hline
+        Anderson-Darling (Normal) & 1.613223e-05 \\
+        \hline
+        Kolmogorov-Smirnov (Normal) & 0.06862226 \\
+        \hline
+        Shapiro-Wilk (Normal) & 6.581438e-05 \\
+        \hline
+        Kolmogorov-Smirnov (Exponencial) & 0.4796857 \\
+        \hline
+        Kolmogorov-Smirnov (Gamma) & 0.03938671 \\
+        \hline
+        Kolmogorov-Smirnov (Chi-cuadrado) & 0.03611553 \\
+        \hline
+    \end{tabular}
+    \caption{Resultados de las pruebas de distribución para la variable \textit{wt.loss} de los que ganaron peso}
+    \label{tab:pruebas_distribucion_wt_loss_GANANCIA}
+\end{table}
+
+Por lo que podemos concluir que tanto la distribución de la pérdida de peso como la de la ganancia de peso siguen una distribución Exponencial.
+
+\subsubsection*{Intervalo de confianza para la media de la personas que ganaron peso}
+
+\subsubsection*{Hipótesis creativa (lo mismo)}
+
+
+
 
 	\section*{Conclusiones}
 	El conjunto de datos del cáncer de pulmón NCCTG proporciona información valiosa sobre los resultados de supervivencia en pacientes con cáncer de pulmón avanzado. Los datos destacan la importancia de las puntuaciones de rendimiento y la pérdida de peso como posibles predictores de la supervivencia. Los estudios futuros podrían utilizar este conjunto de datos para modelado pronóstico más profundo y validación de herramientas clínicas.
