@@ -147,10 +147,12 @@ El siguienete gráfico muestra la distribución de los tiempos de supervivencia 
 
 % \begin{figure}[h]
 % 	\centering
-% 	\includegraphics[width=0.7\textwidth]{images/time_distribution.jpg}
+% 	\includegraphics[width=0.7\textwidth]{.images/time_distribution.jpg}
 % 	\caption{Distribución de los tiempos de supervivencia}
 % 	\label{fig:time_distribution}
 % \end{figure}
+
+hrule height 0.5mm
 
 Por tanto es conveniente realizar las pruebas de hipótesis para determinar si la variable sigue una distribución específica. Dicha prueba resultó en los siguientes valores:
 
@@ -183,7 +185,7 @@ Como es posible apreciar solo la prueba de Kolmogorov-Smirnov para la distribuci
 
 El intervalo de confianza para la media de la variable \textbf{time} es de 269.2987567105341 a 341.1661555701677 con un nivel de confianza del 99\%. Esto lo podemos saber gracias al siguiente código :
 
-\begin{lstlisting}[language=Python, caption={Código en Python para calcular el intervalo de confianza}]
+\begin{lstlisting}[language=Python, caption={Código en Python para calcular el intervalo de confianza},label={lst:intervalo_confianza_normal}]
     import pandas as pd
     import numpy as np
     from scipy.stats import norm as z
@@ -280,7 +282,19 @@ El intervalo de confianza para la media de la variable \textbf{time} es de 269.2
 
     \subsubsection*{Prueba de Distribución}
 
-    La siguiente tabla muestra la distribución de las edades de los pacientes comparada con diferentes tipos de distribución.
+    El siguiente gráfico muestra la distribución de las edades de los pacientes comparada con diferentes tipos de distribución.
+
+% \begin{figure}[h]
+% 	\centering
+% 	\includegraphics[width=0.7\textwidth]{.images/time_distribution.jpg}
+% 	\caption{Distribución de los tiempos de supervivencia}
+% 	\label{fig:time_distribution}
+% \end{figure}
+
+\hrule height 0.5mm
+
+Por tanto es conveniente realizar las pruebas de hipótesis para determinar si la variable
+sigue una distribución específica. Dicha prueba resultó en los siguientes valores:
 
 \begin{table}[h!]
     \centering
@@ -309,35 +323,12 @@ El intervalo de confianza para la media de la variable \textbf{time} es de 269.2
     
     \subsubsection*{Intervalo de confianza para la media}
 
-    El intervalo de confianza para la media de la variable \textbf{age} es de 60.89954141062864 a 63.99519543147662 con un nivel de confianza del 99\%. Esto lo podemos saber gracias al siguiente código :
+    El intervalo de confianza para la media de la variable \textbf{age} es de 60.89954141062864 a 63.99519543147662 con un nivel de confianza del 99\%. Esto lo podemos saber gracias al siguiente código, al ser análogo al código \ref{lst:intervalo_confianza_normal} utilizado para el intervalo de confianza de la variable \textbf{time} solamente sustituiríamos:
 
     \begin{lstlisting}[language=Python, caption={Código en Python para calcular el intervalo de confianza}]
-        import pandas as pd
-        import numpy as np
-        from scipy.stats import norm as z
-        
-        # Leer el archivo CSV y seleccionar la columna 'age'
-        muestra = pd.read_csv('lung_dataset.csv')['age'].dropna().values
-        
-        
-        media_muestral = np.mean(muestra)
-        desviacion_muestral = np.std(muestra, ddof=1)
-        n = len(muestra)
-        
-        # Nivel de confianza y grados de libertad
-        nivel_significancia = 0.01
-        confianza = 1 - nivel_significancia
-        
+muestra = pd.read_csv('lung_dataset.csv')['age'].dropna().values
     
-        z_critico = z.ppf(1 - nivel_significancia / 2)
-        
-        
-        margen_error = z_critico * (desviacion_muestral / np.sqrt(n))
-        limite_inferior = media_muestral - margen_error
-        limite_superior = media_muestral + margen_error
-        
-        print(media_muestral, desviacion_muestral, (limite_inferior, limite_superior))
-        \end{lstlisting}
+    \end{lstlisting}
 
     \subsubsection*{Hipótesis creativa (lo mismo)}
 
