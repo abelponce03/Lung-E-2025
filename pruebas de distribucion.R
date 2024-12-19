@@ -7,7 +7,7 @@ library(survival)
 # Cargar el dataset
 data("lung")
 
-#lung_clean <- na.omit(lung)
+lung_clean <- na.omit(lung)
 lung_clean <- lung[lung$wt.loss > 0, ]
 nrow(lung_clean)
 #lung_clean$wt.loss <- ifelse(lung_clean$wt.loss < 0, -lung_clean$wt.loss, lung_clean$wt.loss)

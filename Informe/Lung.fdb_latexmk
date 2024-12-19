@@ -1,8 +1,8 @@
 # Fdb version 4
-["pdflatex"] 1734551493 "e:/Universidad/3er Año/E/Proyecto Lung/Lung-E-2025/Informe/Lung.tex" "Lung.pdf" "Lung" 1734551496 0
-  "Lung.aux" 1734551496 6959 ade68dde3714b9a7ee0a6b1ad487129a "pdflatex"
-  "Lung.out" 1734551496 216 36cded82789529f52a20e6e8ecdb19a3 "pdflatex"
-  "Lung.tex" 1734551493 31770 ed30ac3fa42663531bc6c42e49c104c1 ""
+["pdflatex"] 1734579668 "e:/Universidad/3er Año/E/Proyecto Lung/Lung-E-2025/Informe/Lung.tex" "Lung.pdf" "Lung" 1734579670 0
+  "Lung.aux" 1734579670 7345 063be378abc6079b58c69c9744326251 "pdflatex"
+  "Lung.out" 1734579670 216 36cded82789529f52a20e6e8ecdb19a3 "pdflatex"
+  "Lung.tex" 1734579666 36516 8e95de91111b6d96ad5cdb354c737076 ""
   "distribución_wt_loss.png" 1734549296 28310 8ff0a117423bfef4f82aec733cec7832 ""
   "distribución_wt_loss_ganancia.png" 1734549969 24408 088a3d8ca259a829540694fb69f49505 ""
   "distribución_wt_loss_perdida.png" 1734549916 24486 1d0f268c3216e8eb355b51983a104aa3 ""
@@ -95,7 +95,7 @@
   "e:/Programas/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1690117281 4588928 f292080dcf79fde2005d4c2eba19644c ""
   "e:/Programas/texlive/2023/texmf-var/web2c/pdftex/pdflatex.fmt" 1690117424 6627766 ba6e960d4561e2321d957ae9ea9117be ""
   "e:/Programas/texlive/2023/texmf.cnf" 1690117265 713 e69b156964470283e0530f5060668171 ""
-  "e:/Universidad/3er Año/E/Proyecto Lung/Lung-E-2025/Informe/Lung.tex" 1734551493 31770 ed30ac3fa42663531bc6c42e49c104c1 ""
+  "e:/Universidad/3er Año/E/Proyecto Lung/Lung-E-2025/Informe/Lung.tex" 1734579666 36516 8e95de91111b6d96ad5cdb354c737076 ""
   (generated)
   "Lung.aux"
   "Lung.log"

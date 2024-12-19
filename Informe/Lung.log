@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.7.23)  18 DEC 2024 14:51
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.7.23)  18 DEC 2024 22:41
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -431,7 +431,7 @@ Package pdftex.def Info: distribución_wt_loss_ganancia.png  used on input line 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[12 <./distribución_wt_loss.png> <./distribución_wt_loss_perdida.png>] [13 <./distribución_wt_loss_ganancia.png>] [14] (./Lung.aux)
+[12 <./distribución_wt_loss.png> <./distribución_wt_loss_perdida.png>] [13 <./distribución_wt_loss_ganancia.png>] [14] [15] [16] (./Lung.aux)
 
 LaTeX Warning: There were undefined references.
 
@@ -439,18 +439,18 @@ Package rerunfilecheck Info: File `Lung.out' has not changed.
 (rerunfilecheck)             Checksum: 36CDED82789529F52A20E6E8ECDB19A3;216.
  ) 
 Here is how much of TeX's memory you used:
- 11825 strings out of 477325
- 180701 string characters out of 5825221
- 1967382 words of memory out of 5000000
- 31823 multiletter control sequences out of 15000+600000
+ 11938 strings out of 477325
+ 182344 string characters out of 5825221
+ 2164382 words of memory out of 5000000
+ 31848 multiletter control sequences out of 15000+600000
  519901 words of font info for 59 fonts, out of 8000000 for 9000
  480 hyphenation exceptions out of 8191
  75i,9n,76p,876b,2178s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <e:/Programas/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><e:/Programas/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><e:/Programas/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><e:/Programas/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><e:/Programas/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb><e:/Programas/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><e:/Programas/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb><e:/Programas/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on Lung.pdf (14 pages, 196516 bytes).
+Output written on Lung.pdf (16 pages, 211563 bytes).
 PDF statistics:
- 234 PDF objects out of 1000 (max. 8388607)
- 194 compressed objects within 2 object streams
- 107 named destinations out of 1000 (max. 500000)
+ 348 PDF objects out of 1000 (max. 8388607)
+ 304 compressed objects within 4 object streams
+ 195 named destinations out of 1000 (max. 500000)
  24 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -677,12 +677,116 @@ Por lo tanto, es conveniente realizar las pruebas de hipótesis para determinar 
 
 Por lo que podemos concluir que tanto la distribución de la pérdida de peso como la de la ganancia de peso siguen una distribución Exponencial.
 
+\subsubsection*{Intervalo de confianza para las media de las personas que perdieron peso}
+
+El intervalo de confianza para la media de la variable \textbf{wt.loss} de las personas que perdieron peso es de 12.086570460717061 a 18.346939910801844 con un nivel de confianza del 99\%. Esto lo podemos saber gracias al siguiente código:
+
+\begin{lstlisting}[language=Python, caption={Código en Python para calcular el intervalo de confianza para la media de una distribución exponencial}, label={lst:intervalo_confianza_exponencial}]
+    import pandas as pd
+    import numpy as np
+    from scipy.stats import chi2
+
+    # Leer el archivo CSV y seleccionar la columna 'wt.loss'
+    df = pd.read_csv('lung_dataset.csv')
+    wt_loss = df['wt.loss'].dropna()
+
+    # Filtrar los valores mayores que 0
+    wt_loss_filtered = wt_loss[wt_loss > 0].values
+
+    # Parametros
+    n = len(wt_loss_filtered)
+    alpha = 0.01  # Nivel de significancia (para un intervalo de confianza del 99%)
+
+    # Suma de los datos
+    sum_data = np.sum(wt_loss_filtered)
+
+    # Valores criticos de chi-cuadrado
+    chi2_lower = chi2.ppf(alpha / 2, 2 * n)
+    chi2_upper = chi2.ppf(1 - alpha / 2, 2 * n)
+
+    # Intervalo de confianza
+    lower_bound =  (2 * sum_data)/chi2_upper 
+    upper_bound = (2 * sum_data)/chi2_lower
+
+    print(f"Intervalo de confianza para la media de una distribucion exponencial: ({lower_bound}, {upper_bound})")
+
+\end{lstlisting}
+
 \subsubsection*{Intervalo de confianza para la media de la personas que ganaron peso}
 
-\subsubsection*{Hipótesis creativa (lo mismo)}
+Análogamente el intervalo de confianza para las media de las personas que ganaron peso está entre 3.621220157012075 y 9.87694081167703 con un 99\% de confianza.
 
+\subsubsection*{Prueba de Hipótesis}
 
+El cáncer de pulmón avanzado es uno de los que estadísticamente provoca más perdida de peso en aquellos que lo sufren. Según estudios, perder más del 5\% del peso corporal en 6 meses o menos es un indicador de un deterioro físico avanzado, dado que el promedio de masa corporal humana a nivel mundial es de 137 lbs, probaremos que aquellos pacientes que fallecen tienden a tener una perdida de peso corporal de 6.85 lbs (5\% de 137 lbs).
 
+Tomemos como hipótesis nula: El valor medio de la perdida de peso en 6 meses de los pacientes que fallecieron durante el estudio es menor de 6.85 lbs.
+
+Por tanto la hipótesis alternativa es que dicho valor es mayor que 6.85 lbs.
+
+Esto lo podemos calcular con el siguiente código, para un nivel de significación del 0.01
+
+\begin{lstlisting}[language=Python]
+import numpy as np
+import pandas as pd
+from scipy.stats import chi2
+
+valor_hipotetico = 6.85
+# Leer el archivo CSV y seleccionar la columna 'wt.loss' y 'status'
+df = pd.read_csv('lung_dataset.csv')
+wt_loss = df[df['status'] == 2]['wt.loss'].dropna()
+
+# Filtrar los valores mayores que 0
+wt_loss_filtered = wt_loss[wt_loss > 0].values
+
+def prueba_hipotesis_exponencial(datos, media_poblacional, alfa=0.05):
+    """
+    Realiza una prueba de hipotesis para verificar si la media poblacional
+    es menor que un valor dado en una distribucian exponencial.
+
+    Parametros:
+    - datos: lista o array de datos muestrales.
+    - media_poblacional: valor de media poblacional bajo la hipotesis nula.
+    - alfa: nivel de significancia (por defecto 0.05).
+
+    Retorna:
+    - Resultado de la prueba y el valor p.
+    """
+    # Calculo de la media muestral y el tamano de la muestra
+    media_muestral = np.mean(datos)
+    n = len(datos)
+    
+    # Hipotesis:
+    # H0: Media poblacional <= media_poblacional
+    # H1: Media poblacional > media_poblacional (prueba unilateral)
+
+    # Varianza muestral para una exponencial (estimador de maxima verosimilitud)
+    varianza_muestral = np.var(datos, ddof=1)
+    
+    # Estadistico de prueba (estimador 1/x)
+    estadistico_prueba = n * (media_muestral / media_poblacional)
+    #print(estadistico_prueba)
+    # Valor critico y comparacion
+    valor_critico = chi2.ppf(1 - alfa, df=n)
+    #print(valor_critico)
+    p_valor = 1 - chi2.cdf(estadistico_prueba, df=n)
+
+    # Resultado
+    if estadistico_prueba > valor_critico:
+        resultado = "Rechazamos la hipotesis nula"
+    else:
+        resultado = "No podemos rechazar la hipotesis nula"
+    
+    return resultado, p_valor, estadistico_prueba
+
+resultado, p_valor, estadistico = prueba_hipotesis_exponencial(wt_loss_filtered, 6.85, 0.01)
+print(f"Resultado: {resultado}")
+print(f"Valor p: {p_valor}")
+print(f"Estadistico de prueba: {estadistico}")
+
+\end{lstlisting}
+
+Bajo esta prueba se rechaza la hipótesis nula bajo un p-value de 4.779732165616224e-12 por lo que podemos decir que podemos asumir la hipótesis alternativa con un 1\% de significancia, y por tanto estadísticamente las personas que fallecen presentan una disminución de peso de más de 6.85 lbs
 
 	\section*{Conclusiones}
 	El conjunto de datos del cáncer de pulmón NCCTG proporciona información valiosa sobre los resultados de supervivencia en pacientes con cáncer de pulmón avanzado. Los datos destacan la importancia de las puntuaciones de rendimiento y la pérdida de peso como posibles predictores de la supervivencia. Los estudios futuros podrían utilizar este conjunto de datos para modelado pronóstico más profundo y validación de herramientas clínicas.

@@ -51,7 +51,7 @@ for (var in names(lung)) {
     #cat("Variable:", var, "\n")
     
     # Determinar si cumple con la normalidad
-    if (test_result$p.value > 0.01) {
+    # if (test_result$p.value > 0.01) {
       cat("Cumple con la normalidad (p-value:", test_result$p.value, ")\n")
     } else {
       cat("No cumple con la normalidad (p-value:", test_result$p.value, ")\n")
