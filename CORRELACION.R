@@ -1,27 +1,22 @@
-rm(list=ls())
-
 library(survival)
+library(corrplot)
 
+# Load the lung cancer dataset
 data("lung")
 
-library(corrplot)
+# Calculate correlation matrices
 cor_matrix_Pearson <- cor(lung)
-cor_matrix_Spearman <- cor(lung,method = "spearman")
-corrplot(cor_matrix_Pearson,method = "circle",type ="upper", tl.col = "black", tl.srt = 55)
+cor_matrix_Spearman <- cor(lung, method = "spearman")
 
-corrplot(cor_matrix_Spearman,method = "square",type ="upper", tl.col = "black", tl.srt = 55)
+# Visualize correlation matrices
+corrplot(cor_matrix_Pearson, method = "circle", type = "upper", tl.col = "black", tl.srt = 55)
+corrplot(cor_matrix_Spearman, method = "square", type = "upper", tl.col = "black", tl.srt = 55)
 
-var_combinations <- combn(names(lung), 2)
-
+# Create interactive scatter plots with color-coding
 for (i in 1:ncol(var_combinations)) {
   var1 <- var_combinations[1, i]
   var2 <- var_combinations[2, i]
   
-  plot(lung[[var1]], lung[[var2]])
+  plot(x = lung[[var1]], y = lung[[var2]], color = lung$status) 
+    layout(title = paste(var1, "vs.", var2))
 }
-
-cor(lung)
-corrplot(cor_matrix_Spearman,type ="upper")
-cor_matrix_Spearman
-
-
