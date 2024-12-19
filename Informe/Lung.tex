@@ -215,6 +215,38 @@ El intervalo de confianza para la media de la variable \textbf{time} es de 269.2
 
     \subsubsection*{Hipótesis atractiva (luego creas una)}
 
+    Se plantea que el tiempo de supervivencia de los pacientes con cáncer es de un promedio de 250 días. Probemos la veracidad de esta proposición mediante el siguiente código:
+
+    \begin{lstlisting}[language=Python, caption={Código en Python para calcular el estadígrafo de la prueba de hipotesis},label={3st:prueba_hipotesis_time}]
+        
+    import math
+    import pandas as pd
+    from scipy.stats import t as t_dist
+
+    muestra = pd.read_csv('lung_dataset.csv')['time'].dropna().values
+
+
+    # H0: La media de la edad es <= 250
+    # H1: La media de la edad es > 250
+    mu_0 = 250  
+    alpha = 0.01  # Nivel de significancia
+
+
+    n = len(muestra)                     
+    sample_mean = sum(muestra) / n       # Media muestral
+    sample_std = math.sqrt(sum((x - sample_mean) ** 2 for x in muestra) / (n - 1))  
+    t_stat = (sample_mean - mu_0) / (sample_std / math.sqrt(n))  
+
+    # Grados de libertad
+    df = n - 1
+
+
+    t_critical = t_dist.ppf(1 - alpha, df)  
+
+    \end{lstlisting}
+
+    Este código nos da como resultado que se rechaza la hipótesis nula, por lo que el tiempo de supervivencia promedio de los pacientes con cáncer de pulmón es mayor a 250 días.
+
     \subsection*{\underline{Status}}
 
     La variable de estado de censura, codificada como 1 para censurado y 2 para fallecido, es crucial para el análisis de supervivencia. \textbf{La Figura }\ref{fig:status_distribution} muestra la distribución de los estados de censura en el conjunto de datos. La mayoría de los pacientes están censurados, lo que refleja la naturaleza de los estudios de supervivencia donde no todos los pacientes experimentan el evento de interés (es decir, la muerte) durante el período de seguimiento. 
@@ -316,9 +348,6 @@ El intervalo de confianza para la proporción de la variable \textbf{status} es 
     print(f"Intervalo de confianza al {confianza*100}%: ({limite_inferior}, {limite_superior})")
 
 \end{lstlisting}
-
-\subsubsection*{Hipótesis creativa (lo mismo)}
-
 
     \subsection*{\underline{Age}}
 
@@ -429,7 +458,22 @@ muestra = pd.read_csv('lung_dataset.csv')['age'].dropna().values
     
     \end{lstlisting}
 
-    \subsubsection*{Hipótesis creativa (lo mismo)}
+    \subsubsection*{Prueba de hipótesis para la media}
+
+    Se plantea que la edad promedio de los pacientes con cáncer es de más de 60 años. Utilizando la implementación análoga para la variable time \ref{3st:prueba_hipotesis_time}.
+
+    \begin{lstlisting}[language=Python, caption={Código en Python para calcular el estimador de la prueba de hipotesis},label={3st:prueba_hipotesis_age}]
+        
+
+muestra = pd.read_csv('lung_dataset.csv')['age'].dropna().values
+
+# H0: La media de la edad es <= 60
+# H1: La media de la edad es > 60
+mu_0 = 60  
+
+    \end{lstlisting}
+
+    Este código nos da como resultado que se rechaza la hipótesis nula, por lo que la edad promedio de los pacientes con cáncer de pulmón es más de 60 años. 
 
     \subsection*{\underline{Sex}}
 
@@ -451,13 +495,13 @@ A continuación se presentan las medidas de tendencia central para la variable \
         \hline
         Media & 1.394737 \\
         \hline
-        Moda & 1.000000 \\
+        Moda & 1 \\
         \hline
-        Mediana & 1.000000 \\
+        Mediana & 1 \\
         \hline
-        Q1 (25\%) & 1.000000 \\
+        Q1 (25\%) & 1 \\
         \hline
-        Q3 (75\%) & 2.000000 \\
+        Q3 (75\%) & 2 \\
         \hline
     \end{tabular}
     \caption{Medidas de tendencia central para la variable \textit{sex}}
@@ -474,11 +518,11 @@ A continuación se presentan las medidas de variabilidad para la variable \texti
         \hline
         \textbf{Medida} & \textbf{Valor} \\
         \hline
-        Máximo & 2.0000000 \\
+        Máximo & 2 \\
         \hline
-        Mínimo & 1.0000000 \\
+        Mínimo & 1 \\
         \hline
-        Rango & 1.0000000 \\
+        Rango & 1 \\
         \hline
         Varianza & 0.2399722 \\
         \hline
@@ -491,6 +535,8 @@ A continuación se presentan las medidas de variabilidad para la variable \texti
     \label{tab:medidas_variabilidad_sex}
 \end{table}
     
+ \newpage
+
     \subsubsection*{Prueba de Distribución}
 
     \textbf{La Figura }\ref{fig:sex_distribution} muestra la distribución de los pacientes por sexo. Como se puede observar, hay una proporción ligeramente mayor de pacientes masculinos en comparación con los femeninos. Esta diferencia en la distribución de sexos puede influir en los resultados de supervivencia y, por lo tanto, es crucial tenerla en cuenta en cualquier análisis posterior.
@@ -511,7 +557,46 @@ A continuación se presentan las medidas de variabilidad para la variable \texti
 
     \end{lstlisting}
 
-    \subsubsection*{Hipótesis creativa (lo mismo)}
+    \subsubsection*{Prueba de hipótesis para dos muestras}
+
+    Verificación de la existencia de una diferencia significativa en la proporción de personas fallecidas (status = 2) entre los géneros (sex: 1 para hombres, 2 para mujeres). Esto permitiría explorar si el género está asociado con la probabilidad de fallecimiento en el contexto del estudio. Nos apoyaremos en el siguiente código para darle solución a la proposición.
+
+    \begin{lstlisting}[language=Python]
+        
+        import math
+from scipy.stats import norm
+import pandas as pd
+
+# Datos del dataset
+# Status = 2 (Fallecidos)
+# Sex = 1 (Hombres), 2 (Mujeres)
+
+# Leer el archivo CSV y seleccionar las columnas necesarias
+lung_data = pd.read_csv('lung_dataset.csv')[['sex', 'status']].dropna()
+
+# Contar fallecidos y totales para hombres y mujeres
+male_fallecidos = lung_data[(lung_data['sex'] == 1) & (lung_data['status'] == 2)].shape[0]
+female_fallecidos = lung_data[(lung_data['sex'] == 2) & (lung_data['status'] == 2)].shape[0]
+male_total = lung_data[lung_data['sex'] == 1].shape[0]
+female_total = lung_data[lung_data['sex'] == 2].shape[0]
+
+# Proporciones de fallecidos para hombres y mujeres
+p_male = male_fallecidos / male_total
+p_female = female_fallecidos / female_total
+
+p_pool = (male_fallecidos + female_fallecidos) / (male_total + female_total)
+
+z_stat = (p_male - p_female) / math.sqrt(
+    p_pool * (1 - p_pool) * (1 / male_total + 1 / female_total)
+)
+
+alpha = 0.05
+z_critical = norm.ppf(1 - alpha / 2)
+
+
+    \end{lstlisting}
+
+    Después de obtener los resultados del código vemos que se rechaza la hipótesis nula, por lo que hay diferencias significativas en la mortalidad entre sexos, lo cual podría tener implicaciones importantes para la investigación futura y las políticas de salud pública.
 
     \subsection*{\underline{Pat.karno}}
 
@@ -589,9 +674,24 @@ A continuación se presentan las medidas de variabilidad para la variable \texti
 
     \subsubsection*{Intervalo de confianza para la media}
 
-    \subsubsection*{Hipótesis creativa (lo mismo)}
+    \subsubsection*{Prueba de hipótesis para la media}
 
+    Se plantea que la puntuación promedio asignada por los pacientes con cáncer de pulmón, en una escala de 1 a 100, en función de su bienestar corporal es de 75. Utilizando la implementación análoga para la variable time  \ref{3st:prueba_hipotesis_time}.
+
+    \begin{lstlisting}[language=Python, caption={Código en Python para calcular el estimador de la prueba de hipotesis},label={3st:prueba_hipotesis_pat.karno}]
+        
+muestra = pd.read_csv('lung_dataset.csv')['pat.karno'].dropna().values
+
+# H0: La media de la edad es <= 75
+# H1: La media de la edad es > 75
+mu_0 = 75  
+
+    \end{lstlisting}
+
+ El resultado de este código nos dice que se rechaza la hipótesis nula, por lo que la calificación que dada por cada paciente es superior a 75, lo que nos dice que en promedio los pacientes sienten mejoría ante su estado de enfermedad.
     
+
+   
 
 	\section*{Conclusiones}
 	El conjunto de datos del cáncer de pulmón NCCTG proporciona información valiosa sobre los resultados de supervivencia en pacientes con cáncer de pulmón avanzado. Los datos destacan la importancia de las puntuaciones de rendimiento y la pérdida de peso como posibles predictores de la supervivencia. Los estudios futuros podrían utilizar este conjunto de datos para modelado pronóstico más profundo y validación de herramientas clínicas.

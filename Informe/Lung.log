@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.7.25)  18 DEC 2024 14:50
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.7.25)  18 DEC 2024 21:16
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -389,60 +389,60 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
  <./distribucion_time.png>]
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 187.
- [5] [6]
-<distribucion_status.png, id=90, 446.26724pt x 431.81325pt>
+ [5] [6] [7]
+<distribucion_status.png, id=120, 446.26724pt x 431.81325pt>
 File: distribucion_status.png Graphic file (type png)
 <use distribucion_status.png>
-Package pdftex.def Info: distribucion_status.png  used on input line 285.
+Package pdftex.def Info: distribucion_status.png  used on input line 317.
 (pdftex.def)             Requested size: 317.07614pt x 306.81357pt.
 
-Overfull \hbox (4.16109pt too wide) in paragraph at lines 292--293
+Overfull \hbox (4.16109pt too wide) in paragraph at lines 324--325
 \OT1/cmr/m/n/12 El in-ter-valo de con-fi-anza para la pro-porci^^Son de la vari-able \OT1/cmr/bx/n/12 sta-tus \OT1/cmr/m/n/12 es de 0.6474013349555908
  []
 
-[7 <./distribucion_status.png>] [8]
-<distribucion_age.png, id=134, 446.26724pt x 431.81325pt>
+[8 <./distribucion_status.png>] [9]
+<distribucion_age.png, id=162, 446.26724pt x 431.81325pt>
 File: distribucion_age.png Graphic file (type png)
 <use distribucion_age.png>
-Package pdftex.def Info: distribucion_age.png  used on input line 390.
+Package pdftex.def Info: distribucion_age.png  used on input line 419.
 (pdftex.def)             Requested size: 317.07614pt x 306.81357pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[9 <./distribucion_age.png>]
+[10 <./distribucion_age.png>]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[10]
-<distribucion_sex.png, id=159, 446.26724pt x 431.81325pt>
+[11] [12]
+<distribucion_sex.png, id=201, 446.26724pt x 431.81325pt>
 File: distribucion_sex.png Graphic file (type png)
 <use distribucion_sex.png>
-Package pdftex.def Info: distribucion_sex.png  used on input line 500.
+Package pdftex.def Info: distribucion_sex.png  used on input line 546.
 (pdftex.def)             Requested size: 317.07614pt x 306.81357pt.
- [11 <./distribucion_sex.png>] [12]
-<distribucion_pat.karno.png, id=185, 446.26724pt x 431.81325pt>
+ [13 <./distribucion_sex.png>] [14] [15]
+<distribucion_pat.karno.png, id=263, 446.26724pt x 431.81325pt>
 File: distribucion_pat.karno.png Graphic file (type png)
 <use distribucion_pat.karno.png>
-Package pdftex.def Info: distribucion_pat.karno.png  used on input line 584.
+Package pdftex.def Info: distribucion_pat.karno.png  used on input line 669.
 (pdftex.def)             Requested size: 317.07614pt x 306.81357pt.
- [13 <./distribucion_pat.karno.png>] [14] (./Lung.aux)
+ [16 <./distribucion_pat.karno.png>] [17] (./Lung.aux)
 Package rerunfilecheck Info: File `Lung.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 11851 strings out of 476025
- 179497 string characters out of 5794015
- 1998382 words of memory out of 5000000
- 32042 multiletter control sequences out of 15000+600000
+ 11949 strings out of 476025
+ 180852 string characters out of 5794015
+ 2086382 words of memory out of 5000000
+ 32067 multiletter control sequences out of 15000+600000
  519901 words of font info for 59 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,9n,76p,847b,2064s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on Lung.pdf (14 pages, 170439 bytes).
+Output written on Lung.pdf (17 pages, 182797 bytes).
 PDF statistics:
- 262 PDF objects out of 1000 (max. 8388607)
- 219 compressed objects within 3 object streams
- 128 named destinations out of 1000 (max. 500000)
+ 361 PDF objects out of 1000 (max. 8388607)
+ 314 compressed objects within 4 object streams
+ 201 named destinations out of 1000 (max. 500000)
  26 words of extra memory for PDF output out of 10000 (max. 10000000)
 

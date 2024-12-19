@@ -1,8 +1,8 @@
 # Fdb version 4
-["pdflatex"] 1734551418 "e:/Proyectos/Lung-E-2025/Informe/Lung.tex" "Lung.pdf" "Lung" 1734551419 0
-  "Lung.aux" 1734551419 6354 c354af07afdccafbdd4b3762d2631ac8 "pdflatex"
-  "Lung.out" 1734551419 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "Lung.tex" 1734551415 26942 cb2376d3b11a720d2f94bc1e4ee2352a ""
+["pdflatex"] 1734574560 "e:/Proyectos/Lung-E-2025/Informe/Lung.tex" "Lung.pdf" "Lung" 1734574562 0
+  "Lung.aux" 1734574562 7290 623f476c4cb1ae7c51b9e9e3043e6fdb "pdflatex"
+  "Lung.out" 1734574562 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "Lung.tex" 1734574559 31431 251fd96688700193c553305f661223e3 ""
   "c:/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1690276694 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "c:/texlive/2023/texmf-dist/fonts/map/fontname/texfonts.map" 1690277098 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "c:/texlive/2023/texmf-dist/fonts/tfm/jknappen/ec/tcrm1200.tfm" 1690276927 1536 74b7293ec3713bb7fdca8dd1bd1f469c ""
@@ -96,7 +96,7 @@
   "distribucion_sex.png" 1734547232 6586 13f5570dbd6a48c6416f2da9e45166c2 ""
   "distribucion_status.png" 1734547248 6057 acb2c5fe26745796a8fea9ff18238942 ""
   "distribucion_time.png" 1734543713 13983 6d27f7d78ac905651ff44f41d087e2b9 ""
-  "e:/Proyectos/Lung-E-2025/Informe/Lung.tex" 1734551415 26942 cb2376d3b11a720d2f94bc1e4ee2352a ""
+  "e:/Proyectos/Lung-E-2025/Informe/Lung.tex" 1734574559 31431 251fd96688700193c553305f661223e3 ""
   (generated)
   "Lung.aux"
   "Lung.log"
