@@ -6,12 +6,12 @@ data("lung")
 
 library(corrplot)
 cor_matrix_Pearson <- cor(lung)
-cor_matrix_Spearman <- colung,method = "spearman")
+cor_matrix_Spearman <- cor(lung,method = "spearman")
 corrplot(cor_matrix_Pearson,method = "circle",type ="upper", tl.col = "black", tl.srt = 55)
 
 corrplot(cor_matrix_Spearman,method = "square",type ="upper", tl.col = "black", tl.srt = 55)
 
-var_combinations <- combn(names(LifeCycleSavings), 2)
+var_combinations <- combn(names(lung), 2)
 
 for (i in 1:ncol(var_combinations)) {
   var1 <- var_combinations[1, i]
