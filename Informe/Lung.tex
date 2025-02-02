@@ -952,15 +952,132 @@ print(f"Estadistico de prueba: {estadistico}")
 
 Bajo esta prueba se rechaza la hipótesis nula bajo un p-value de 4.779732165616224e-12 por lo que podemos decir que podemos asumir la hipótesis alternativa con un 1\% de significancia, y por tanto estadísticamente las personas que fallecen presentan una disminución de peso de más de 6.85 lbs
 
-   
+\subsection*{Análisis de Regresión}
 
-	\section*{Conclusiones}
-	El conjunto de datos del cáncer de pulmón NCCTG proporciona información valiosa sobre los resultados de supervivencia en pacientes con cáncer de pulmón avanzado. Los datos destacan la importancia de las puntuaciones de rendimiento y la pérdida de peso como posibles predictores de la supervivencia. Los estudios futuros podrían utilizar este conjunto de datos para modelado pronóstico más profundo y validación de herramientas clínicas.
-	
-	\section*{Referencias}
-	\begin{itemize}
-		\item Loprinzi CL, Laurie JA, Wieand HS, Krook JE, Novotny PJ, Kugler JW, et al. "Evaluación prospectiva de variables pronósticas a partir de cuestionarios completados por los pacientes." \textit{Journal of Clinical Oncology}. 12(3):601-7, 1994.
-		\item Therneau T. Documentación del paquete \textit{survival}.
-	\end{itemize}
+
+El análisis de regresión con un modelo OLS en este caso no es factible por ciertas razones expuestas posteriormente, por tanto proponemos dicho análisis utilizando una técnica conocida, el modelo Weibull AFT. \\
+La regresión con modelo Weibull AFT (Accelerated Failure Time) es una técnica utilizada en análisis de supervivencia para modelar el tiempo hasta que ocurre un evento de interés, como la muerte o la falla de un componente.
+ En este contexto, el modelo Weibull AFT asume que el tiempo de supervivencia se puede modelar como una función de los efectos de las covariables y que sigue una distribución Weibull.\\
+
+¿En qué consiste un modelo Weibull AFT?
+
+1. \textbf{Estructura del modelo}: En un modelo AFT, se supone que el tiempo hasta el evento ($T$) está relacionado con un vector de covariables ($X$) a través de una relación multiplicativa. Específicamente, se puede expresar como:
+   \[
+   T = \exp(X\beta) \cdot Z
+   \]
+   donde $Z$ es una variable aleatoria que sigue una distribución Weibull.
+
+2. \textbf{Distribución Weibull}: La función de supervivencia para la distribución Weibull se define como:
+   \[
+   S(t) = e^{-(t/\lambda)^\kappa}
+   \]
+   donde $\lambda$ es el parámetro de escala y $\kappa$ es el parámetro de forma. Dependiendo del valor de $\kappa$, la distribución puede ser monótonamente creciente o decreciente.
+
+3. \textbf{Interpretación}: En el contexto de la regresión AFT, los coeficientes estimados ($\beta$) indican cómo las covariables afectan el tiempo hasta el evento. Un coeficiente positivo implica que un aumento en la covariable está asociado con un aumento en el tiempo hasta el evento (es decir, una vida útil más larga).
+
+¿Por qué usar Weibull AFT en vez de OLS?
+
+1. \textbf{Naturaleza del dato}: OLS (Mínimos Cuadrados Ordinarios) asume que los errores son normalmente distribuidos y que la relación entre las variables es lineal. Sin embargo, en análisis de supervivencia, los datos suelen estar censurados (es decir, no todos los individuos experimentan el evento antes de que termine el estudio), lo que hace que OLS no sea apropiado.
+
+2. \textbf{Censura}: El modelo AFT maneja adecuadamente la censura, permitiendo que se utilicen todos los datos disponibles, incluso aquellos para los cuales no se ha observado el evento. OLS no puede manejar la censura correctamente, lo que puede llevar a estimaciones sesgadas.
+
+3. \textbf{Distribución del tiempo}: El modelo Weibull AFT permite modelar explicitamente la distribución del tiempo hasta el evento, lo cual es fundamental en análisis de supervivencia. OLS no tiene en cuenta la naturaleza del tiempo hasta el evento y puede dar resultados engañosos.
+
+4. \textbf{Interpretación más adecuada}: Los modelos AFT proporcionan interpretaciones más intuitivas en términos del tiempo hasta un evento, lo que es especialmente útil en contextos clínicos o industriales donde el tiempo es una variable crítica.
+
+En resumen, el uso del modelo Weibull AFT es preferido en situaciones donde se está analizando el tiempo hasta un evento y se presentan datos censurados, mientras que OLS no es adecuado debido a sus supuestos y limitaciones en este contexto.
+
+
+\subsubsection*{Fórmula del Modelo}
+El modelo Weibull AFT se plantea como:
+\begin{equation}
+\ln(T) = \beta_0 + \beta_1 \cdot \text{age} + \beta_2 \cdot \text{sex} +  \beta_3 \cdot \text{pat.karno} + \beta_4 \cdot \text{wt.loss} + \sigma \epsilon
+\end{equation}
+
+\subsubsection*{Componentes}
+\begin{itemize}
+    \item \textbf{Variables del dataset}:
+    \begin{itemize}
+        \item $T$: \texttt{time} (tiempo de supervivencia en días)
+        \item \texttt{status}: Indicador de censura (1 = evento observado, 2 = censurado)
+        \item \texttt{age}: Edad en años
+        \item \texttt{sex}: Género (1 = hombre, 0 = mujer) (Se realizó un ajuste para el modelo)
+        \item \texttt{pat.karno}: Puntuación Karnofsky (0-100)
+        \item \texttt{wt.loss}: Pérdida de peso (lbs)
+    \end{itemize}
+    
+    \item \textbf{Parámetros}:
+    \begin{itemize}
+        \item $\beta_0$: Intercepto
+        \item $\beta_1, \dots, \beta_4$: Coeficientes de regresión
+        \item $\sigma$: Parámetro de escala Weibull
+        \item $\epsilon$: Error con distribución de valor extremo (extreme value para Weibull)
+    \end{itemize}
+\end{itemize}
+
+\subsubsection*{Fórmula del Modelo Ajustado}
+
+Luego de analizar los p valores (descartar aquellos mayores a 0.05, no son significativos para el modelo) el modelo queda:
+
+\begin{equation}
+    \ln(T) = \beta_0 + \beta_1 \cdot \text{sex} +  \beta_2 \cdot \text{pat.karno}  + \sigma \epsilon
+\end{equation}
+
+\subsubsection*{Resultados de la Regresión}
+\begin{tabular}{lrrrr}
+\toprule
+Predictor & Coeficiente ($\beta$) & Error Estándar & $z$-value & $p$-value \\
+\midrule
+Intercepto & 5.16967 & 0.37717 & 13.71 & $<2 \times 10^{-16}$ \\
+sex (Hombre=1) & -0.33580 & 0.14435 & -2.33 & 0.0200 \\
+pat.karno & 0.01373 & 0.00461 & 2.98 & 0.0029 \\
+Log(scale) & -0.31650 & 0.07224 & -4.38 & $1.2 \times 10^{-5}$ \\
+\bottomrule
+\end{tabular}
+
+\vspace{1cm}
+\textbf{Escala (scale)}: 0.729 \\
+\textbf{Distribución}: Weibull \\
+
+\subsubsection*{Interpretación Clave}
+Efectos de los Predictores
+\begin{itemize}
+\item \textbf{Sexo ($\beta_{\text{sex}} = -0.336$)}:
+\begin{equation*}
+\exp(-0.336) \approx 0.714 \implies \text{Hombres tienen 28.6\% menos tiempo de supervivencia que mujeres}
+\end{equation*}
+\textit{Ejemplo}: Si una mujer tiene un tiempo de supervivencia estimado de 200 días, un hombre comparable tendría un tiempo de supervivencia estimado de $200 \times 0.714 \approx 143$ días. Esto sugiere que el género masculino está asociado con una menor supervivencia en comparación con el género femenino en este conjunto de datos.
+
+\item \textbf{Puntuación Karnofsky ($\beta_{\text{pat.karno}} = 0.0137$)}:
+\begin{equation*}
+\exp(0.0137) \approx 1.0138 \implies \text{Cada punto adicional en la puntuación Karnofsky aumenta la supervivencia en 1.38\%}
+\end{equation*}
+\textit{Ejemplo}: Si un paciente mejora su puntuación Karnofsky en 10 puntos, su tiempo de supervivencia se incrementaría en aproximadamente un 14.6\%. Esto indica que una mejor percepción del estado funcional por parte del paciente está asociada con una mayor supervivencia.
+\end{itemize}
+
+\subsubsection*{Parámetro de Forma Weibull}
+El parámetro de forma de la distribución Weibull es crucial para entender la naturaleza del riesgo a lo largo del tiempo. En este caso:
+\begin{equation*}
+\alpha = \frac{1}{\text{scale}} = \frac{1}{0.729} \approx 1.372 \quad (\textit{Riesgo creciente con el tiempo})
+\end{equation*}
+Un parámetro de forma $\alpha > 1$ indica que el riesgo de fallecimiento aumenta con el tiempo. Esto es consistente con la progresión de enfermedades como el cáncer de pulmón, donde el riesgo de mortalidad tiende a incrementarse a medida que la enfermedad avanza.
+
+\subsubsection*{Conclusiones del Modelo}
+El análisis de regresión con el modelo Weibull AFT ha revelado varios hallazgos importantes:
+\begin{itemize}
+\item El género masculino está asociado con una menor supervivencia en comparación con el género femenino.
+\item Una mejor puntuación Karnofsky, que refleja una mejor percepción del estado funcional por parte del paciente, está asociada con una mayor supervivencia.
+\item El riesgo de fallecimiento aumenta con el tiempo, lo cual es consistente con la naturaleza progresiva del cáncer de pulmón avanzado.
+\end{itemize}
+Estos resultados subrayan la importancia de considerar tanto las características demográficas como las percepciones del estado funcional en el análisis de supervivencia de pacientes con cáncer de pulmón. Además, el uso del modelo Weibull AFT ha permitido manejar adecuadamente la censura en los datos y proporcionar una interpretación más precisa de los factores que influyen en la supervivencia.
+
+\section*{Conclusiones}
+El conjunto de datos del cáncer de pulmón NCCTG proporciona información valiosa sobre los resultados de supervivencia en pacientes con cáncer de pulmón avanzado. Los datos destacan la importancia de las puntuaciones de rendimiento y la pérdida de peso como posibles predictores de la supervivencia. Los estudios futuros podrían utilizar este conjunto de datos para modelado pronóstico más profundo y validación de herramientas clínicas.
+
+\section*{Referencias}
+\begin{itemize}
+    \item Loprinzi CL, Laurie JA, Wieand HS, Krook JE, Novotny PJ, Kugler JW, et al. "Evaluación prospectiva de variables pronósticas a partir de cuestionarios completados por los pacientes." \textit{Journal of Clinical Oncology}. 12(3):601-7, 1994.
+    \item Therneau T. Documentación del paquete \textit{survival}.
+\end{itemize}
 	
 \end{document}
