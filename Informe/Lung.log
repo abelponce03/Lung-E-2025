@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.7.25)  19 DEC 2024 09:26
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.7.25)  2 FEB 2025 10:03
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -414,23 +414,50 @@ File: distribucion_pat.karno.png Graphic file (type png)
 <use distribucion_pat.karno.png>
 Package pdftex.def Info: distribucion_pat.karno.png  used on input line 673.
 (pdftex.def)             Requested size: 317.07614pt x 306.81357pt.
- [16 <./distribucion_pat.karno.png>] [17] (./Lung.aux)
+ [16 <./distribucion_pat.karno.png>]
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<distribución_wt_loss.png, id=280, 1156.32pt x 597.432pt>
+File: distribución_wt_loss.png Graphic file (type png)
+<use distribución_wt_loss.png>
+Package pdftex.def Info: distribución_wt_loss.png  used on input line 768.
+(pdftex.def)             Requested size: 317.07614pt x 163.8157pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[17]
+<distribución_wt_loss_perdida.png, id=292, 1156.32pt x 597.432pt>
+File: distribución_wt_loss_perdida.png Graphic file (type png)
+<use distribución_wt_loss_perdida.png>
+Package pdftex.def Info: distribución_wt_loss_perdida.png  used on input line 780.
+(pdftex.def)             Requested size: 317.07614pt x 163.8157pt.
+<distribución_wt_loss_ganancia.png, id=293, 1156.32pt x 597.432pt>
+File: distribución_wt_loss_ganancia.png Graphic file (type png)
+<use distribución_wt_loss_ganancia.png>
+Package pdftex.def Info: distribución_wt_loss_ganancia.png  used on input line 787.
+(pdftex.def)             Requested size: 317.07614pt x 163.8157pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[18 <./distribución_wt_loss.png> <./distribución_wt_loss_perdida.png>] [19 <./distribución_wt_loss_ganancia.png>] [20] [21] [22] (./Lung.aux)
 Package rerunfilecheck Info: File `Lung.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 11949 strings out of 476025
- 180852 string characters out of 5794015
- 2086382 words of memory out of 5000000
- 32067 multiletter control sequences out of 15000+600000
+ 12104 strings out of 476025
+ 183619 string characters out of 5794015
+ 2164382 words of memory out of 5000000
+ 32114 multiletter control sequences out of 15000+600000
  519901 words of font info for 59 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,9n,76p,847b,2064s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on Lung.pdf (17 pages, 182129 bytes).
+<c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
+Output written on Lung.pdf (22 pages, 269371 bytes).
 PDF statistics:
- 361 PDF objects out of 1000 (max. 8388607)
- 314 compressed objects within 4 object streams
- 201 named destinations out of 1000 (max. 500000)
- 26 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 516 PDF objects out of 1000 (max. 8388607)
+ 455 compressed objects within 5 object streams
+ 306 named destinations out of 1000 (max. 500000)
+ 41 words of extra memory for PDF output out of 10000 (max. 10000000)
 

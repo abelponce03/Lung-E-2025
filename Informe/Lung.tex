@@ -693,7 +693,264 @@ mu_0 = 75
     \end{lstlisting}
 
  El resultado de este código nos dice que se rechaza la hipótesis nula, por lo que la calificación que dada por cada paciente es superior a 75, lo que nos dice que en promedio los pacientes sienten mejoría ante su estado de enfermedad.
+
+    \subsection*{\underline{Wt.loss}}
+
+    La variable \texttt{wt.loss} representa la pérdida de peso en los pacientes con cáncer de pulmón. Específicamente, esta variable indica la cantidad de peso que ha perdido un paciente en los últimos seis meses antes de ser diagnosticado o evaluado.
+
+La pérdida de peso es un indicador importante en oncología, ya que puede reflejar el estado nutricional del paciente y la progresión de la enfermedad. En muchos casos, una pérdida significativa de peso puede asociarse con un pronóstico más desfavorable y puede influir en las decisiones sobre el tratamiento y el manejo del paciente.
+
+Es importante considerar esta variable junto con otras características clínicas y demográficas para obtener una comprensión más completa del estado del paciente y su supervivencia.
+Esta variable tiene valores negativos, lo que indica que algunos pacientes ganaron peso en lugar de perderlo. Esto puede deberse a una variedad de factores, como la retención de líquidos, la ganancia de peso relacionada con el tratamiento o la variabilidad en la medición del peso. En cualquier caso, es importante tener en cuenta esta variabilidad al interpretar los resultados del análisis.
+
+\subsubsection*{Clasificación de la variable}
+
+En cuanto al tipo de variable es \textbf{cuantitativa discreta}, aunque el peso generalmente se toma como una variable continua, en este caso se hace un redondeo a los \textbf{enteros} que representa el número de libras que ha perdido el paciente. Es de \textbf{intervalos} ya que el 0 tiene un significado.
+
+\subsubsection*{Medidas de tendencia central}
+
+A continuación se presentan las medidas de tendencia central para la variable \textit{wt.loss}:
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|}
+        \hline
+        \textbf{Medida} & \textbf{Valor} \\
+        \hline
+        Media & 9.831776 \\
+        \hline
+        Moda & 0.000000 \\
+        \hline
+        Mediana & 7.000000 \\
+        \hline
+        Q1 (25\%) & 0.000000 \\
+        \hline
+        Q3 (75\%) & 15.750000 \\
+        \hline
+    \end{tabular}
+    \caption{Medidas de tendencia central para la variable \textit{wt.loss}}
+    \label{tab:medidas_tendencia_central_wt_loss}
+\end{table}
+
+\subsubsection*{Medidas de variabilidad}
+
+A continuación se presentan las medidas de variabilidad para la variable \textit{wt.loss}:
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|}
+        \hline
+        \textbf{Medida} & \textbf{Valor} \\
+        \hline
+        Máximo & 68.000000 \\
+        \hline
+        Mínimo & -24.000000 \\
+        \hline
+        Rango & 92.000000 \\
+        \hline
+        Varianza & 172.657014 \\
+        \hline
+        Desviación Estándar & 13.139902 \\
+        \hline
+        Coeficiente de Variación & 1.336473 \\
+        \hline
+    \end{tabular}
+    \caption{Medidas de variabilidad para la variable \textit{wt.loss}}
+    \label{tab:medidas_variabilidad_wt_loss}
+\end{table}
+
+\subsubsection*{Prueba de Distribución}
+
+El siguiente gráfico muestra la distribución de la pérdida de peso en los pacientes comparada con diferentes tipos de distribución.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{distribución_wt_loss.png}
+    \caption{Distribución de la pérdida(o ganancia) de peso}
+    \label{fig:distribución_wt_loss}
+\end{figure}
+
+\newpage
+
+Como es posible notar la distribución empírica de la pérdida de peso no sigue ninguna de las distribuciones conocidas por lo que realizaremos un análisis diferenciado entre las personas que perdieron peso y las que ganaron peso.
+Haciendo dicho análisis podemos diferenciar los siguientes gráficos:
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{distribución_wt_loss_perdida.png}
+    \caption{Distribución de la pérdida de peso}
+    \label{fig:distribución_wt_loss_perdida}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{distribución_wt_loss_ganancia.png}
+    \caption{Distribución de la ganancia de peso}
+    \label{fig:distribución_wt_loss_ganancia}
+\end{figure}
+
+\newpage
+
+Por lo tanto, es conveniente realizar las pruebas de hipótesis para determinar si las variables siguen una distribución específica. Dicha prueba resultó en los siguientes valores:
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|}
+        \hline
+        \textbf{Prueba} & \textbf{p-value} \\
+        \hline
+        Anderson-Darling (Normal) & 1.197951e-11 \\
+        \hline
+        Kolmogorov-Smirnov (Normal) & 0.005456181 \\
+        \hline
+        Shapiro-Wilk (Normal) & 4.066897e-10 \\
+        \hline
+        Kolmogorov-Smirnov (Exponencial) & 0.09287115 \\
+        \hline
+        Kolmogorov-Smirnov (Gamma) & 0.03941509 \\
+        \hline
+        Kolmogorov-Smirnov (Chi-cuadrado) & 7.692063e-54 \\
+        \hline
+    \end{tabular}
+    \caption{Resultados de las pruebas de distribución para la variable \textit{wt.loss} de los que perdieron peso}
+    \label{tab:pruebas_distribucion_wt_loss_PERDIDA}
+\end{table}
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|}
+        \hline
+        \textbf{Prueba} & \textbf{p-value} \\
+        \hline
+        Anderson-Darling (Normal) & 1.613223e-05 \\
+        \hline
+        Kolmogorov-Smirnov (Normal) & 0.06862226 \\
+        \hline
+        Shapiro-Wilk (Normal) & 6.581438e-05 \\
+        \hline
+        Kolmogorov-Smirnov (Exponencial) & 0.4796857 \\
+        \hline
+        Kolmogorov-Smirnov (Gamma) & 0.03938671 \\
+        \hline
+        Kolmogorov-Smirnov (Chi-cuadrado) & 0.03611553 \\
+        \hline
+    \end{tabular}
+    \caption{Resultados de las pruebas de distribución para la variable \textit{wt.loss} de los que ganaron peso}
+    \label{tab:pruebas_distribucion_wt_loss_GANANCIA}
+\end{table}
+
+Por lo que podemos concluir que tanto la distribución de la pérdida de peso como la de la ganancia de peso siguen una distribución Exponencial.
+
+\subsubsection*{Intervalo de confianza para las media de las personas que perdieron peso}
+
+El intervalo de confianza para la media de la variable \textbf{wt.loss} de las personas que perdieron peso es de 12.086570460717061 a 18.346939910801844 con un nivel de confianza del 99\%. Esto lo podemos saber gracias al siguiente código:
+
+\begin{lstlisting}[language=Python, caption={Código en Python para calcular el intervalo de confianza para la media de una distribución exponencial}, label={lst:intervalo_confianza_exponencial}]
+    import pandas as pd
+    import numpy as np
+    from scipy.stats import chi2
+
+    # Leer el archivo CSV y seleccionar la columna 'wt.loss'
+    df = pd.read_csv('lung_dataset.csv')
+    wt_loss = df['wt.loss'].dropna()
+
+    # Filtrar los valores mayores que 0
+    wt_loss_filtered = wt_loss[wt_loss > 0].values
+
+    # Parametros
+    n = len(wt_loss_filtered)
+    alpha = 0.01  # Nivel de significancia (para un intervalo de confianza del 99%)
+
+    # Suma de los datos
+    sum_data = np.sum(wt_loss_filtered)
+
+    # Valores criticos de chi-cuadrado
+    chi2_lower = chi2.ppf(alpha / 2, 2 * n)
+    chi2_upper = chi2.ppf(1 - alpha / 2, 2 * n)
+
+    # Intervalo de confianza
+    lower_bound =  (2 * sum_data)/chi2_upper 
+    upper_bound = (2 * sum_data)/chi2_lower
+
+    print(f"Intervalo de confianza para la media de una distribucion exponencial: ({lower_bound}, {upper_bound})")
+
+\end{lstlisting}
+
+\subsubsection*{Intervalo de confianza para la media de la personas que ganaron peso}
+
+Análogamente el intervalo de confianza para las media de las personas que ganaron peso está entre 3.621220157012075 y 9.87694081167703 con un 99\% de confianza.
+
+\subsubsection*{Prueba de Hipótesis}
+
+El cáncer de pulmón avanzado es uno de los que estadísticamente provoca más perdida de peso en aquellos que lo sufren. Según estudios, perder más del 5\% del peso corporal en 6 meses o menos es un indicador de un deterioro físico avanzado, dado que el promedio de masa corporal humana a nivel mundial es de 137 lbs, probaremos que aquellos pacientes que fallecen tienden a tener una perdida de peso corporal de 6.85 lbs (5\% de 137 lbs).
+
+Tomemos como hipótesis nula: El valor medio de la perdida de peso en 6 meses de los pacientes que fallecieron durante el estudio es menor de 6.85 lbs.
+
+Por tanto la hipótesis alternativa es que dicho valor es mayor que 6.85 lbs.
+
+Esto lo podemos calcular con el siguiente código, para un nivel de significación del 0.01
+
+\begin{lstlisting}[language=Python]
+import numpy as np
+import pandas as pd
+from scipy.stats import chi2
+
+valor_hipotetico = 6.85
+# Leer el archivo CSV y seleccionar la columna 'wt.loss' y 'status'
+df = pd.read_csv('lung_dataset.csv')
+wt_loss = df[df['status'] == 2]['wt.loss'].dropna()
+
+# Filtrar los valores mayores que 0
+wt_loss_filtered = wt_loss[wt_loss > 0].values
+
+def prueba_hipotesis_exponencial(datos, media_poblacional, alfa=0.05):
+    """
+    Realiza una prueba de hipotesis para verificar si la media poblacional
+    es menor que un valor dado en una distribucian exponencial.
+
+    Parametros:
+    - datos: lista o array de datos muestrales.
+    - media_poblacional: valor de media poblacional bajo la hipotesis nula.
+    - alfa: nivel de significancia (por defecto 0.05).
+
+    Retorna:
+    - Resultado de la prueba y el valor p.
+    """
+    # Calculo de la media muestral y el tamano de la muestra
+    media_muestral = np.mean(datos)
+    n = len(datos)
     
+    # Hipotesis:
+    # H0: Media poblacional <= media_poblacional
+    # H1: Media poblacional > media_poblacional (prueba unilateral)
+
+    # Varianza muestral para una exponencial (estimador de maxima verosimilitud)
+    varianza_muestral = np.var(datos, ddof=1)
+    
+    # Estadistico de prueba (estimador 1/x)
+    estadistico_prueba = n * (media_muestral / media_poblacional)
+    #print(estadistico_prueba)
+    # Valor critico y comparacion
+    valor_critico = chi2.ppf(1 - alfa, df=n)
+    #print(valor_critico)
+    p_valor = 1 - chi2.cdf(estadistico_prueba, df=n)
+
+    # Resultado
+    if estadistico_prueba > valor_critico:
+        resultado = "Rechazamos la hipotesis nula"
+    else:
+        resultado = "No podemos rechazar la hipotesis nula"
+    
+    return resultado, p_valor, estadistico_prueba
+
+resultado, p_valor, estadistico = prueba_hipotesis_exponencial(wt_loss_filtered, 6.85, 0.01)
+print(f"Resultado: {resultado}")
+print(f"Valor p: {p_valor}")
+print(f"Estadistico de prueba: {estadistico}")
+
+\end{lstlisting}
+
+Bajo esta prueba se rechaza la hipótesis nula bajo un p-value de 4.779732165616224e-12 por lo que podemos decir que podemos asumir la hipótesis alternativa con un 1\% de significancia, y por tanto estadísticamente las personas que fallecen presentan una disminución de peso de más de 6.85 lbs
 
    
 
