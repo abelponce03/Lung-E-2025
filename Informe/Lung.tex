@@ -951,7 +951,103 @@ print(f"Estadistico de prueba: {estadistico}")
 \end{lstlisting}
 
 Bajo esta prueba se rechaza la hipótesis nula bajo un p-value de 4.779732165616224e-12 por lo que podemos decir que podemos asumir la hipótesis alternativa con un 1\% de significancia, y por tanto estadísticamente las personas que fallecen presentan una disminución de peso de más de 6.85 lbs
+\subsection*{Análisis de Correlación}
 
+Para entender mejor las relaciones entre las variables numéricas en nuestro conjunto de datos, realizamos un análisis de correlación utilizando dos métodos diferentes: el coeficiente de correlación de Pearson y el coeficiente de correlación de Spearman.
+
+\subsubsection*{Metodología}
+Se utilizaron dos matrices de correlación:
+\begin{itemize}
+    \item \textbf{Correlación de Pearson}: Mide la fuerza y dirección de la relación lineal entre variables.
+    \item \textbf{Correlación de Spearman}: Evalúa la relación monótona entre variables, siendo más robusta a valores atípicos.
+\end{itemize}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.45\textwidth]{correlacion_pearson.png}
+    \caption{Matriz de correlación de Pearson}
+    \label{fig:correlacion_pearson}
+\end{figure}
+
+\newpage
+\subsubsection*{Correlaciones Detalladas}
+
+\begin{table}[h!]
+    \centering
+    \small
+    \begin{tabular}{|l|r|}
+        \hline
+        \textbf{Par de Variables} & \textbf{Correlación de Pearson} \\
+        \hline
+        inst - time & 0.02 \\
+        inst - status & -0.13 \\
+        inst - age & 0.05 \\
+        inst - sex & 0.08 \\
+        inst - ph.ecog & 0.06 \\
+        inst - ph.karno & -0.02 \\
+        inst - pat.karno & 0.04 \\
+        inst - meal.cal & 0.10 \\
+        inst - wt.loss & -0.17 \\
+        time - status & -0.16 \\
+        time - age & -0.08 \\
+        time - sex & 0.11 \\
+        time - ph.ecog & -0.19 \\
+        time - ph.karno & 0.09 \\
+        time - pat.karno & 0.18 \\
+        time - meal.cal & 0.07 \\
+        time - wt.loss & 0.03 \\
+        status - age & 0.16 \\
+        status - sex & -0.22 \\
+        status - ph.ecog & 0.24 \\
+        status - ph.karno & -0.16 \\
+        status - pat.karno & -0.19 \\
+        status - meal.cal & 0.02 \\
+        status - wt.loss & 0.05 \\
+        \hline
+    \end{tabular}
+    \caption{Correlaciones de Pearson (Parte 1)}
+    \label{tab:correlaciones_pearson1}
+\end{table}
+
+\begin{table}[h!]
+    \centering
+    \small
+    \begin{tabular}{|l|r|}
+        \hline
+        \textbf{Par de Variables} & \textbf{Correlación de Spearman} \\
+        \hline
+        ph.ecog - ph.karno & -0.84 \\
+        ph.ecog - pat.karno & -0.53 \\
+        ph.karno - pat.karno & 0.51 \\
+        age - ph.ecog & 0.32 \\
+        age - ph.karno & -0.33 \\
+        age - pat.karno & -0.24 \\
+        status - ph.ecog & 0.24 \\
+        time - ph.ecog & -0.24 \\
+        status - sex & -0.22 \\
+        pat.karno - wt.loss & -0.22 \\
+        meal.cal - wt.loss & -0.25 \\
+        time - pat.karno & 0.21 \\
+        time - ph.karno & 0.19 \\
+        sex - wt.loss & -0.19 \\
+        ph.karno - wt.loss & -0.20 \\
+        \hline
+    \end{tabular}
+    \caption{Correlaciones de Spearman más relevantes (|r| > 0.15)}
+    \label{tab:correlaciones_spearman}
+\end{table}
+
+\subsubsection*{Hallazgos Principales}
+Las correlaciones más significativas (con umbral de 0.7) encontradas fueron:
+
+\begin{itemize}
+    \item \textbf{ph.karno y pat.karno}: Correlación de 0.72. Esto indica una fuerte relación positiva entre las evaluaciones de rendimiento realizadas por médicos y pacientes. Sugiere consistencia entre las percepciones de los profesionales y los pacientes sobre el estado funcional.
+    \item La correlación negativa más fuerte se observa entre \textbf{ph.ecog} y \textbf{ph.karno} (r = -0.84), lo cual es esperado ya que miden aspectos similares pero en escalas opuestas.
+    \item El \textbf{status} muestra correlaciones moderadas negativas con \textbf{sex} y positivas con \textbf{ph.ecog}, sugiriendo diferencias en la supervivencia entre géneros.
+    \item La \textbf{edad} muestra correlaciones moderadas con las medidas de rendimiento (\textbf{ph.ecog}, \textbf{ph.karno}, \textbf{pat.karno}), indicando que el estado funcional tiende a deteriorarse con la edad.
+\end{itemize}
+
+Esta correlación tiene sentido desde una perspectiva clínica, ya que ambas medidas evalúan el estado funcional del paciente, aunque desde diferentes perspectivas. La moderada pero no perfecta correlación sugiere que, si bien hay acuerdo general entre las evaluaciones de médicos y pacientes, también hay diferencias importantes en las percepciones que podrían ser clínicamente relevantes.
 \subsection*{Análisis de Regresión}
 
 
